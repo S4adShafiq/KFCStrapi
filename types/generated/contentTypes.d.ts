@@ -373,43 +373,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAddonAddon extends Struct.CollectionTypeSchema {
-  collectionName: 'addons';
-  info: {
-    displayName: 'Addon';
-    pluralName: 'addons';
-    singularName: 'addon';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    food_items: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::food-item.food-item'
-    >;
-    image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::addon.addon'> &
-      Schema.Attribute.Private;
-    metaDesc: Schema.Attribute.Text;
-    metaTitle: Schema.Attribute.String;
-    name: Schema.Attribute.String;
-    price: Schema.Attribute.BigInteger;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -460,7 +423,6 @@ export interface ApiFoodItemFoodItem extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    addons: Schema.Attribute.Relation<'manyToMany', 'api::addon.addon'>;
     available: Schema.Attribute.Boolean;
     category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
@@ -998,7 +960,6 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::addon.addon': ApiAddonAddon;
       'api::category.category': ApiCategoryCategory;
       'api::food-item.food-item': ApiFoodItemFoodItem;
       'plugin::content-releases.release': PluginContentReleasesRelease;

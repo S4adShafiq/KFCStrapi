@@ -42,12 +42,6 @@
     "metaDesc": {
       "type": "text"
     },
-    "addons": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::addon.addon",
-      "inversedBy": "food_items"
-    },
     "category": {
       "type": "relation",
       "relation": "oneToOne",
